@@ -29,5 +29,25 @@
                 {{ $slot }}
             </div>
         </div>
+        <footer class="bg-gray-100 text-gray-700 py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                <!-- Logo / Ime sajta -->
+                <div class="text-lg font-semibold">
+                    Thanks for visiting our site!
+                </div>
+
+                <!-- Navigacija -->
+                <ul class="flex space-x-6 text-sm">
+                    <li><a href="{{ route('welcome') }}" class="hover:text-black transition">Home</a></li>
+                    <li><a href="{{ route('about') }}" class="hover:text-black transition">About us</a></li>
+                    <li><a href="{{ route('contact') }}" class="hover:text-black transition">Contact</a></li>
+                </ul>
+
+                <!-- Autorska prava -->
+                <div class="text-sm text-gray-500">
+                    &copy; {{ date('Y') }} Company Name
+                </div>
+            </div>
+        </footer>
     </body>
 </html>
