@@ -4,13 +4,11 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::view('/', 'welcome')->name('welcome');
-
 Route::view('/about', 'about')->name('about');
 
-Route::view('/contact', 'contact')->name('contact');
-
-Route::view('/shop', 'shop')->name('shop');
+Route::get('/', [\App\Http\Controllers\HomepageController::class, 'index'])->name('welcome');
+Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact');
+Route::get('/shop', [\App\Http\Controllers\ShopController::class, 'index'])->name('shop');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
