@@ -20,7 +20,12 @@
                                     </p>
                                 </div>
                                 <div class="px-6 pt-4 pb-2 flex flex-col items-center">
-                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mb-2">${{ $product['price'] }}</span>
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mb-2">
+                                        Amount: {{ $product['amount'] }}
+                                    </span>
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mb-2">
+                                        ${{ $product['price'] }}
+                                    </span>
                                     <a class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                         Add to Cart
                                     </a>
