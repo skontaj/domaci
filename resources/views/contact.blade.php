@@ -14,9 +14,16 @@
                         <h2 class="text-3xl font-bold text-gray-800 mb-4">Contact us</h2>
                         <p class="text-gray-600 mb-10">Have a question? Send us a message via the form or visit us at the location below.</p>
 
+                        @if (session('success'))
+                            <div class="bg-green-100 text-green-800 p-2 rounded mt-4">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                            <!-- Kontakt forma -->
-                            <form method="POST" class="space-y-6">
+
+                            <!-- Contact form -->
+                            <form method="POST" action="{{ route('contact.store') }}" class="space-y-6">
                                 @csrf
 
                                 <!-- Email -->

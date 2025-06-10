@@ -12,7 +12,7 @@
                     @foreach ($products as $product)
                         <div class="flex flex-wrap justify-center">
                             <div class="max-w-sm rounded overflow-hidden shadow-lg mb-4 mx-2">
-                                <img class="w-full" src="{{ $product['image'] }}" alt="{{ $product['name'] }}">
+                                <img class="w-full" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product['name'] }}">
                                 <div class="px-6 py-4">
                                     <div class="font-bold text-xl mb-2 text-center">{{ $product['name'] }}</div>
                                     <p class="text-gray-700 text-base text-center">
