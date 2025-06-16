@@ -45,4 +45,10 @@ class ProductController extends Controller
 
         return redirect()->route('admin.products.create')->with('success', 'Product added successfully!');
     }
+
+    public function deleteProduct(Product $product)
+    {
+        $product->delete();
+        return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully!');
+    }
 }

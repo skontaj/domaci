@@ -16,7 +16,8 @@ Route::get('/shop', [\App\Http\Controllers\ShopController::class, 'index'])->nam
 Route::get('/admin/add-product', [\App\Http\Controllers\Admin\ProductController::class, 'create'])->name('admin.products.create');
 Route::post('/admin/add-product', [\App\Http\Controllers\Admin\ProductController::class, 'storeProduct'])->name('admin.products.store');
 Route::get('/admin/products', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('admin.products.index');
-
+Route::delete('/admin/delete-product/{product}', [\App\Http\Controllers\Admin\ProductController::class, 'deleteProduct'])->name('admin.products.delete');
+Route::get('/admin/all-contacts', [\App\Http\Controllers\ContactController::class, 'allContacts'])->name('admin.contacts.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -30,5 +30,11 @@ class ContactController extends Controller
 
         return redirect()->back()->with('success', 'The message was sent successfully!');
     }
+    
+    public function allContacts()
+    {
+        $contacts = Contact::orderBy('id', 'desc')->get();
+        return view('admin.contacts.index', compact('contacts'));
+    }
 
 }

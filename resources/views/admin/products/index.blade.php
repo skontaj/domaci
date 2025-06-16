@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Shop') }}
+            {{ __('All Products') }}
         </h2>
     </x-slot>
 
@@ -13,11 +13,12 @@
                         <thead>
                             <tr>
                                 <th class="py-2 px-4 border-b">ID</th>
-                                <th class="py-2 px-4 border-b">Naziv</th>
-                                <th class="py-2 px-4 border-b">Opis</th>
-                                <th class="py-2 px-4 border-b">Količina</th>
-                                <th class="py-2 px-4 border-b">Cena</th>
-                                <th class="py-2 px-4 border-b">Slika</th>
+                                <th class="py-2 px-4 border-b">Name</th>
+                                <th class="py-2 px-4 border-b">Description</th>
+                                <th class="py-2 px-4 border-b">Amount</th>
+                                <th class="py-2 px-4 border-b">Price</th>
+                                <th class="py-2 px-4 border-b">Image</th>
+                                <th class="py-2 px-4 border-b">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +35,14 @@
                                         @else
                                             Nema slike
                                         @endif
+                                    </td>
+                                    <td class="py-2 px-4 border-b">
+                                        
+                                        <form action="{{ route('admin.products.delete', $product->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

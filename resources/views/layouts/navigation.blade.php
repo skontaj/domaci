@@ -59,6 +59,11 @@
                         {{ __('All Products') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('admin.contacts.index')" :active="request()->routeIs('admin.contacts.index')">
+                        {{ __('All Contacts') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             @auth
@@ -148,6 +153,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
                 {{ __('All Products') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.contacts.index')" :active="request()->routeIs('admin.contacts.index')">
+                {{ __('All Contacts') }}
             </x-responsive-nav-link>
         </div>
 
