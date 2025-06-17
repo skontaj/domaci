@@ -22,10 +22,10 @@ class ProductController extends Controller
     public function storeProduct(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'name' => 'required|string|unique:products|max:255',
+            'description' => 'required|string',
             'amount' => 'required|integer|min:0',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|decimal:2|min:0',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -43,11 +43,46 @@ class ProductController extends Controller
             'image' => $imagePath,
         ]);
 
-        return redirect()->route('admin.products.create')->with('success', 'Product added successfully!');
+        return redirect()->route('admin.products.index')->with('success', 'Product added successfully!');
+    }
+
+    public function editProduct(Product $product)
+    {
+        return view('admin.products.edit', compact('product'));
+    }
+
+    public function updateProduct(Request $request, Product $product)
+    {
+        $request->validate([
+            'name' => 'required|string|unique:products,name,' . $product->id . '|max:255',
+            'description' => 'required|string',
+            'amount' => 'required|integer|min:0',
+            'price' => 'required|decimal:2|min:0',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $data = $request->only(['name', 'description', 'amount', 'price']);
+
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($product->image && \Storage::disk('public')->exists($product->image)) {
+                \Storage::disk('public')->delete($product->image);
+            }
+            // Store new image
+            $data['image'] = $request->file('image')->store('products', 'public');
+        }
+
+        $product->update($data);
+
+        return redirect()->back()->with('success', 'The product has been successfully updated!');
     }
 
     public function deleteProduct(Product $product)
     {
+        if ($product->image && \Storage::disk('public')->exists($product->image)) {
+            \Storage::disk('public')->delete($product->image);
+        }
+
         $product->delete();
         return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully!');
     }
