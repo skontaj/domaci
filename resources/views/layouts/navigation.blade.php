@@ -49,20 +49,28 @@
                         {{ __('Contact') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.products.create')" :active="request()->routeIs('admin.products.create')">
-                        {{ __('Add Product') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
-                        {{ __('All Products') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.contacts.index')" :active="request()->routeIs('admin.contacts.index')">
-                        {{ __('All Contacts') }}
-                    </x-nav-link>
+                <div class="flex items-center hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-dropdown align="left" width="48">
+                        <x-slot name="trigger">
+                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                {{ __('Admin') }}
+                                <svg class="ms-2 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </x-slot>
+                        <x-slot name="content">
+                            <x-dropdown-link :href="route('admin.products.create')" :active="request()->routeIs('admin.products.create')">
+                                {{ __('Add Product') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
+                                {{ __('All Products') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('admin.contacts.index')" :active="request()->routeIs('admin.contacts.index')">
+                                {{ __('All Contacts') }}
+                            </x-dropdown-link>
+                        </x-slot>
+                    </x-dropdown>
                 </div>
             </div>
 
@@ -148,15 +156,25 @@
                 {{ __('Contact') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('admin.products.create')" :active="request()->routeIs('admin.products.create')">
-                {{ __('Add Product') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
-                {{ __('All Products') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.contacts.index')" :active="request()->routeIs('admin.contacts.index')">
-                {{ __('All Contacts') }}
-            </x-responsive-nav-link>
+            <div x-data="{ adminOpen: false }" class="relative">
+                <button @click="adminOpen = !adminOpen" class="w-full flex items-center justify-between px-4 py-2 text-left text-gray-700 hover:bg-gray-100 focus:outline-none">
+                    {{ __('Admin') }}
+                    <svg class="ms-2 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <div x-show="adminOpen" @click.away="adminOpen = false" class="mt-1 space-y-1 bg-white border rounded shadow-md absolute left-0 w-full z-10">
+                    <x-responsive-nav-link :href="route('admin.products.create')" :active="request()->routeIs('admin.products.create')">
+                        {{ __('Add Product') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
+                        {{ __('All Products') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.contacts.index')" :active="request()->routeIs('admin.contacts.index')">
+                        {{ __('All Contacts') }}
+                    </x-responsive-nav-link>
+                </div>
+            </div>
         </div>
 
         @auth
